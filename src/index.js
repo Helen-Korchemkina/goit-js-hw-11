@@ -27,17 +27,19 @@ function onSearch(event) {
   searchQuery = event.currentTarget.elements.searchQuery.value;
   galleryList.innerHTML = '';
   total = 0;
-  loadMoreBtn.style.display = 'none';
+  
   if (searchQuery !== '') {
     page = 1;
     onLoadPhotos();
-    loadMoreBtn.style.display = 'block';
+    
   }
 }
 
 function onLoadPhotos() {
+  loadMoreBtn.style.display = 'none';
   getPhotos(searchQuery).then(array => {
     renderPhotosList(array.hits);
+    loadMoreBtn.style.display = 'block';
     forScrollPage();
     if (page === 2) {
       Notify.success(`Hooray! We found ${array.totalHits} images.`);
